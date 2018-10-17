@@ -1,0 +1,64 @@
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+  <div class="container js-instance">
+    <section class="demo-section">
+      <h1>Shopping list</h1>
+
+        <div class="form__item">
+          <input type="text" v-model="goodsName" class="form__field" placeholder="Add a goods" />
+        <button class="button" v-on:click="add">Add</button>
+        </div>
+
+      <ul class="list" v-if="goods.length">
+        <li class="list__item" v-for="(good, index) in goods">
+          {{ good }}
+          <button class="button" v-on:click="removeItem(index)">Remove</button>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+</body>
+
+<script>
+new Vue({
+  el: '.js-instance',
+  name: 'vue-instance',
+
+  data() {
+    return {
+      goodsName: '',
+
+      goods: [
+        'coffee',
+        'apple',
+        'beef',
+        'ham',
+      ],
+    };
+  },
+  mounted() {},
+
+  methods: {
+    removeItem(index) {
+      this.goods.splice(index, 1);
+    },
+
+    add() {
+      if (this.goodsName === '') {
+        return;
+      }
+
+      this.goods.push(this.goodsName);
+      this.goodsName = '';
+    },
+  }
+});
+</script>
+
+</html>
